@@ -132,7 +132,8 @@ img {
   color: var(--dark);
 }
 
-.login-card {
+.login-card, 
+.post-card {
   margin: 0 0 20px 0;
   flex: 0 0 100%;
   /* max-width: 50%; */
@@ -147,9 +148,20 @@ img {
   color: var(--dark);
 }
 
-.page-title {
+.login-title,
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
   background-color: var(--background-main);
   color: var(--light);
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .login a {

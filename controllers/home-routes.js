@@ -1,10 +1,14 @@
 const router = require('express').Router();
+const { nextTick } = require('process');
 const { Gallery, Painting } = require('../models');
 // TODO: Import the custom middleware
 const middleware = require("../utils/auth");
 
 // GET all galleries for homepage
 router.get('/', async (req, res) => {
+
+  console.log('GET ALL = ', req.session);
+
   try {
     const dbGalleryData = await Gallery.findAll({
       include: [
@@ -78,6 +82,9 @@ router.get('/painting/:id', middleware, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+
+  console.log('login = ', req.session);
+
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
@@ -87,12 +94,31 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
+
+  console.log('signup = ', req.session);
+
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
 
   res.render('signup');
+});
+
+router.get('/posts', middleware, (req, res) => {
+// router.get('/posts', (req, res) => {
+
+  console.log('dashboard = ', req.session);
+
+  // if (!req.session.loggedIn) {
+  //   res.redirect('/login');
+  //   return;
+    
+  // }
+
+  res.render('posts', {
+    loggedIn: req.session.loggedIn,
+  });
 });
 
 module.exports = router;
