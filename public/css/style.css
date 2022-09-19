@@ -132,8 +132,12 @@ img {
   color: var(--dark);
 }
 
-.login-card, 
+.container a,
 .post-card {
+  width: 100%;
+}
+
+.login-card {
   margin: 0 0 20px 0;
   flex: 0 0 100%;
   /* max-width: 50%; */
