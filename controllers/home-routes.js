@@ -1,6 +1,6 @@
-const router = require('express').Router();
+const router = require("express").Router();
 // const { nextTick } = require('process');
-const { Gallery, Painting, Post, Comment } = require('../models');
+const { Gallery, Painting, Post, Comment } = require("../models");
 // TODO: Import the custom middleware
 const middleware = require("../utils/auth");
 
@@ -38,7 +38,7 @@ const middleware = require("../utils/auth");
 // GET one gallery
 
 // TODO: Replace the logic below with the custom middleware
-router.get('/gallery/:id', middleware, async (req, res) => {
+router.get("/gallery/:id", middleware, async (req, res) => {
   // section middleware in above line replaces original if else logic
   // middleware(req, res); //section also did it this way
 
@@ -48,28 +48,27 @@ router.get('/gallery/:id', middleware, async (req, res) => {
         {
           model: Painting,
           attributes: [
-            'id',
-            'title',
-            'artist',
-            'exhibition_date',
-            'filename',
-            'description',
+            "id",
+            "title",
+            "artist",
+            "exhibition_date",
+            "filename",
+            "description",
           ],
         },
       ],
     });
     const gallery = dbGalleryData.get({ plain: true });
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
+    res.render("gallery", { gallery, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
-
 });
 
 // GET one painting
 // TODO: Replace the logic below with the custom middleware
-router.get('/painting/:id', middleware, async (req, res) => {
+router.get("/painting/:id", middleware, async (req, res) => {
   // section middleware in above line replaces original if else logic
 
   try {
@@ -77,66 +76,62 @@ router.get('/painting/:id', middleware, async (req, res) => {
 
     const painting = dbPaintingData.get({ plain: true });
 
-    res.render('painting', { painting, loggedIn: req.session.loggedIn });
+    res.render("painting", { painting, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/login', (req, res) => {
-
-  console.log('login = ', req, req.session);
+router.get("/login", (req, res) => {
+  console.log("login = ", req, req.session);
 
   if (req.session.loggedIn) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
-router.get('/signup', (req, res) => {
-
-  console.log('signup = ', req.session);
+router.get("/signup", (req, res) => {
+  console.log("signup = ", req.session);
 
   if (req.session.loggedIn) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('signup');
+  res.render("signup");
 });
 
 // router.get('/posts', middleware, async (req, res) => {
-router.get('/', middleware, async (req, res) => {
-// router.get('/posts', (req, res) => {
+router.get("/", middleware, async (req, res) => {
+  // router.get('/posts', (req, res) => {
 
-  console.log('dashboard = ', req.session);
+  console.log("dashboard = ", req.session);
 
   // if (!req.session.loggedIn) {
   //   res.redirect('/login');
   //   return;
-    
+
   // }
 
   // res.render('posts', {
   //   loggedIn: req.session.loggedIn,
   // });
 
-  console.log('GET ALL POSTS = ', req.session);
+  console.log("GET ALL POSTS = ", req.session);
 
   try {
     const dbPostData = await Post.findAll();
 
-    const posts = dbPostData.map((post) =>
-      post.get({ plain: true })
-    );
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
 
     console.log(posts);
 
     // res.render('posts', {
-    res.render('homepage', {
+    res.render("homepage", {
       posts,
       loggedIn: req.session.loggedIn,
     });
@@ -146,8 +141,8 @@ router.get('/', middleware, async (req, res) => {
   }
 });
 
-router.get('/post/:id', middleware, async (req, res) => {
-// router.get('/post/abc', middleware, async (req, res) => {
+router.get("/post/:id", middleware, async (req, res) => {
+  // router.get('/post/abc', middleware, async (req, res) => {
 
   // res.render('comment', {
   //   loggedIn: req.session.loggedIn,
@@ -158,16 +153,15 @@ router.get('/post/:id', middleware, async (req, res) => {
 
     const posts = dbPostData.get({ plain: true });
 
-    res.render('comment', { posts, loggedIn: req.session.loggedIn });
+    res.render("comment", { posts, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/posts', middleware, async (req, res) => {
-    
-  console.log('dashboard = ', req.session);
+router.get("/posts", middleware, async (req, res) => {
+  console.log("dashboard = ", req.session);
 
   req.session.save(() => {
     req.session.dashboard = true;
@@ -176,14 +170,12 @@ router.get('/posts', middleware, async (req, res) => {
   try {
     const dbPostData = await Post.findAll();
 
-    const posts = dbPostData.map((post) =>
-      post.get({ plain: true })
-    );
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
 
     console.log(posts);
 
     // res.render('posts', {
-    res.render('homepage', {
+    res.render("homepage", {
       posts,
       loggedIn: req.session.loggedIn,
       dashboard: req.session.dashboard,
@@ -194,10 +186,8 @@ router.get('/posts', middleware, async (req, res) => {
   }
 });
 
-
-router.post('/comment', middleware, async (req, res) => {
-    
-  console.log('comment = ', req.session);
+router.post("/comment", middleware, async (req, res) => {
+  console.log("comment = ", req.session);
 
   // CREATE new comment
   console.log(req.body);
@@ -214,12 +204,34 @@ router.post('/comment', middleware, async (req, res) => {
     res.status(200).json(dbCommentData);
 
     // console.log('2 ====== HHHHHHHHHHHHHHHHHH')
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
+});
 
+router.get("/comment/:id", middleware, async (req, res) => {
+  console.log("AAAAAAAAAAAAA =====", req.params);
+
+  try {
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [{ model: Comment, where: { user_id: req.session.userId } }],
+    });
+
+    const posts = dbPostData.get({ plain: true });
+
+    console.log(posts);
+    // console.log(posts.comments);
+
+    res.render("commentSaved", {
+      posts,
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

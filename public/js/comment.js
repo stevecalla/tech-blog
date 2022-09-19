@@ -16,6 +16,7 @@ const commentFormHandler = async (event) => {
 
     if (response.ok) {
       // document.location.replace('/posts');
+      document.location.replace('/comment/' + postId);
     } else {
       alert('Failed to save comment');
     }
