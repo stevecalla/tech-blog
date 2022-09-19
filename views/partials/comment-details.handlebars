@@ -1,6 +1,7 @@
 <section class="post-card">
     <div class="post-header">
       <h2 class="post-title">{{ posts.title }}</h2>
+      <h2 class="post-title">{{ posts.id }}</h2>
       <h2 class="post-author">Posted by Name Name on 5/8/2020</h2>
     </div>
     <div>
@@ -8,16 +9,18 @@
     </div>
 </section>
 <section class="post-card">
-  <form class="form login-form">
+  <form class="form comment-form">
     <div class="form-group">
-      <label for="email-login">Comment</label>
-      <input type="text area" class="form-input" type="text" id="email-login" />
+      <label for="post-comment">Comment</label>
+      <input type="text area" class="form-input" type="text" id="post-comment" data-post={{ posts.id }}/>
     </div>
     <div class="form-group">
       <button class="btn btn-primary btn-custom" type="submit">Submit!</button>
     </div>
   </form>
 </section>
+
+<script src="../../js/comment.js"></script>
 
 {{!-- <section class="post-card">
     <div class="post-header">

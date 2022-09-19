@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { nextTick } = require('process');
-const { Gallery, Painting, Post } = require('../models');
+// const { nextTick } = require('process');
+const { Gallery, Painting, Post, Comment } = require('../models');
 // TODO: Import the custom middleware
 const middleware = require("../utils/auth");
 
@@ -36,6 +36,7 @@ const middleware = require("../utils/auth");
 // });
 
 // GET one gallery
+
 // TODO: Replace the logic below with the custom middleware
 router.get('/gallery/:id', middleware, async (req, res) => {
   // section middleware in above line replaces original if else logic
@@ -85,7 +86,7 @@ router.get('/painting/:id', middleware, async (req, res) => {
 
 router.get('/login', (req, res) => {
 
-  console.log('login = ', req.session);
+  console.log('login = ', req, req.session);
 
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -170,7 +171,6 @@ router.get('/posts', middleware, async (req, res) => {
 
   req.session.save(() => {
     req.session.dashboard = true;
-    // res.status(200).json();
   });
 
   try {
@@ -192,6 +192,34 @@ router.get('/posts', middleware, async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+});
+
+
+router.post('/comment', middleware, async (req, res) => {
+    
+  console.log('comment = ', req.session);
+
+  // CREATE new comment
+  console.log(req.body);
+
+  try {
+    const dbCommentData = await Comment.create({
+      content: req.body.comment,
+      user_id: req.session.userId,
+      post_id: req.body.postId,
+    });
+
+    // console.log('1 ====== HHHHHHHHHHHHHHHHHH')
+
+    res.status(200).json(dbCommentData);
+
+    // console.log('2 ====== HHHHHHHHHHHHHHHHHH')
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+
 });
 
 module.exports = router;
