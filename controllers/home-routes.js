@@ -164,4 +164,34 @@ router.get('/post/:id', middleware, async (req, res) => {
   }
 });
 
+router.get('/posts', middleware, async (req, res) => {
+    
+  console.log('dashboard = ', req.session);
+
+  req.session.save(() => {
+    req.session.dashboard = true;
+    // res.status(200).json();
+  });
+
+  try {
+    const dbPostData = await Post.findAll();
+
+    const posts = dbPostData.map((post) =>
+      post.get({ plain: true })
+    );
+
+    console.log(posts);
+
+    // res.render('posts', {
+    res.render('homepage', {
+      posts,
+      loggedIn: req.session.loggedIn,
+      dashboard: req.session.dashboard,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
