@@ -1,12 +1,18 @@
 :root {
   --primary: #3d5852;
   --secondary: #86938f;
+  --background-main: #221010;
+  --background-secondary: #D9EAD3;
   --tertiary: #5e877f;
   --quatrinary: #6c6b67;
   --light: #e3e4e3;
   --dark: #182c23;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
+}
+
+* {
+  border: 1px solid red;
 }
 
 body {
@@ -31,7 +37,8 @@ a:visited {
 header {
   padding: 40px;
   text-align: center;
-  background: var(--primary);
+  /* background: var(--primary); */
+  background-color: var(--background-main);
   color: var(--light);
 }
 
@@ -41,17 +48,18 @@ main {
   flex-grow: 1;
 }
 
-aside {
+/* aside {
   flex: 0;
   background-color: var(--tertiary);
   padding: 80px;
   text-align: left;
   color: var(--light);
-}
+} */
 
 nav {
   display: flex;
-  background-color: var(--secondary);
+  /* background-color: var(--secondary); */
+  background-color: var(--background-main);
 }
 
 nav a {
@@ -68,7 +76,8 @@ nav a:hover {
 
 .gallery {
   flex: 4;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: var(--background-secondary);
   padding: 50px;
   display: flex;
   flex-flow: row wrap;
@@ -77,6 +86,7 @@ nav a:hover {
 }
 
 .btn-no-style {
+  color: inherit;
   background: none;
   border: none;
   padding: 0;
@@ -85,6 +95,13 @@ nav a:hover {
   font-size: 100%;
   transition: color 0.1s;
   margin-left: 16px;
+}
+
+.btn-custom {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--quatrinary)!important;
+  font-size: 1.2rem;
 }
 
 img {
@@ -115,17 +132,45 @@ img {
   color: var(--dark);
 }
 
+.container a,
+.post-card {
+  width: 100%;
+}
+
 .login-card {
   margin: 0 0 20px 0;
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 100%;
+  /* max-width: 50%; */
   padding: 5px;
   border: 3px solid var(--dark);
   border-radius: var(--border-radius);
-  border-style: double;
-  border-width: thick;
-  background-color: #577a7c;
+  /* border-style: double; */
+  /* border-width: thick; */
+  /* background-color: #577a7c; */
+  background-color: var(--background-secondary);
   color: var(--light);
+  color: var(--dark);
+}
+
+.login-title,
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: var(--background-main);
+  color: var(--light);
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.login a {
+  text-decoration: underline;
+  color: blue;
 }
 
 .card header {
