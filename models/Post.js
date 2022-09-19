@@ -19,10 +19,17 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // gallery_id: {
+    // author_id: {
     //   type: DataTypes.INTEGER,
     //   references: {
-    //     model: 'gallery',
+    //     model: 'user',
+    //     key: 'id',
+    //   },
+    // },
+    // comment_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: 'comment',
     //     key: 'id',
     //   },
     // },
