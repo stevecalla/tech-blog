@@ -1,7 +1,6 @@
 const router = require("express").Router();
 // const { nextTick } = require('process');
 const { Gallery, Painting, Post, Comment, User } = require("../models");
-// TODO: Import the custom middleware
 const middleware = require("../utils/auth");
 
 // GET all galleries for homepage
@@ -67,7 +66,6 @@ router.get("/gallery/:id", middleware, async (req, res) => {
 });
 
 // GET one painting
-// TODO: Replace the logic below with the custom middleware
 router.get("/painting/:id", middleware, async (req, res) => {
   // section middleware in above line replaces original if else logic
 
@@ -242,6 +240,40 @@ router.get("/comment/:id", middleware, async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+});
+
+router.get("/user-posts/", middleware, async (req, res) => {
+  try {
+    const dbPostData = await Post.findAll({
+      include: [{ model: User }],
+      where: { user_id: req.session.userId }
+  });
+
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+    console.log(posts);
+
+    res.render("userPosts", { 
+      posts, 
+      loggedIn: req.session.loggedIn 
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/create-posts/", middleware, async (req, res) => {
+  res.render("createPost", {
+    loggedIn: req.session.loggedIn 
+  });
+});
+
+router.get("/update-posts/", middleware, async (req, res) => {
+  res.render("updatePost", {
+    loggedIn: req.session.loggedIn 
+  });
 });
 
 module.exports = router;

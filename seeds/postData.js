@@ -20,7 +20,7 @@ const postdata = [
   {
     title: 'Cosmos Flowers 4',
     content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
+    user_id: 3,
   },
   {
     title: 'Cosmos Flowers 5',
@@ -30,7 +30,7 @@ const postdata = [
   {
     title: 'Cosmos Flowers 6',
     content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
+    user_id: 2,
   },
   {
     title: 'Cosmos Flowers 7',
@@ -40,12 +40,12 @@ const postdata = [
   {
     title: 'Cosmos Flowers 8',
     content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
+    user_id: 2,
   },
   {
     title: 'Cosmos Flowers 9',
     content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
+    user_id: 3,
   },
 ];
 
