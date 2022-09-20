@@ -276,11 +276,35 @@ router.get("/create-posts/", middleware, async (req, res) => {
   });
 });
 
-router.get("/update-posts/", middleware, async (req, res) => {
-  res.render("updatePost", {
-    loggedIn: req.session.loggedIn,
-    dashboard: req.session.dashboard = true,
-  });
+router.get("/update-posts/:id", middleware, async (req, res) => {
+
+  console.log('update post id = ', req.params.id);
+  try{ 
+    const postData = await Post.findByPk(req.params.id);
+    
+    if(!postData) {
+        res.status(404).json({message: 'No post with this id!'});
+        return;
+    };
+
+    const post = postData.get({ plain: true });
+
+    console.log('update post data = ', post);
+
+    res.render('updatePost', {
+      post,
+      loggedIn: req.session.loggedIn,
+      dashboard: req.session.dashboard = true,
+    });
+
+  } catch (err) {
+      res.status(500).json(err);
+  }; 
+
+  // res.render("updatePost", {
+  //   loggedIn: req.session.loggedIn,
+  //   dashboard: req.session.dashboard = true,
+  // });
 });
 
 router.post('/create-post', async (req, res) => {
