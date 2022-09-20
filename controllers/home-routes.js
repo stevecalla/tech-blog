@@ -167,9 +167,9 @@ router.get("/post/:id", middleware, async (req, res) => {
 router.get("/posts", middleware, async (req, res) => {
   console.log("dashboard = ", req.session);
 
-  req.session.save(() => {
-    req.session.dashboard = true;
-  });
+  // req.session.save(() => {
+  //   req.session.dashboard = true;
+  // });
 
   try {
     const dbPostData = await Post.findAll({
@@ -247,7 +247,11 @@ router.get("/user-posts/", middleware, async (req, res) => {
     const dbPostData = await Post.findAll({
       include: [{ model: User }],
       where: { user_id: req.session.userId }
-  });
+    });
+
+    req.session.save(() => {
+      req.session.dashboard = true;
+    });
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
@@ -255,7 +259,8 @@ router.get("/user-posts/", middleware, async (req, res) => {
 
     res.render("userPosts", { 
       posts, 
-      loggedIn: req.session.loggedIn 
+      loggedIn: req.session.loggedIn,
+      dashboard: req.session.dashboard = true,
     });
 
   } catch (err) {
@@ -266,13 +271,15 @@ router.get("/user-posts/", middleware, async (req, res) => {
 
 router.get("/create-posts/", middleware, async (req, res) => {
   res.render("createPost", {
-    loggedIn: req.session.loggedIn 
+    loggedIn: req.session.loggedIn ,
+    dashboard: req.session.dashboard = true,
   });
 });
 
 router.get("/update-posts/", middleware, async (req, res) => {
   res.render("updatePost", {
-    loggedIn: req.session.loggedIn 
+    loggedIn: req.session.loggedIn,
+    dashboard: req.session.dashboard = true,
   });
 });
 
