@@ -279,6 +279,7 @@ router.get("/create-posts/", middleware, async (req, res) => {
 router.get("/update-posts/:id", middleware, async (req, res) => {
 
   console.log('update post id = ', req.params.id);
+
   try{ 
     const postData = await Post.findByPk(req.params.id);
     
@@ -300,11 +301,6 @@ router.get("/update-posts/:id", middleware, async (req, res) => {
   } catch (err) {
       res.status(500).json(err);
   }; 
-
-  // res.render("updatePost", {
-  //   loggedIn: req.session.loggedIn,
-  //   dashboard: req.session.dashboard = true,
-  // });
 });
 
 router.post('/create-post', async (req, res) => {
@@ -323,6 +319,31 @@ router.post('/create-post', async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+});
+
+router.put("/update/:id", middleware, async (req, res) => {
+
+  console.log('update put id = ', req.params.id);
+
+  // res.send('hello')
+
+  try {
+    const updatedPost = await Post.update({ title: req.body.title, content: req.body.content }, {
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if (!updatedPost || updatedPost[0] === 0) {
+      res.status(404).json({ message: 'Can\'t update. No product found with that id!' });
+      return;
+    }
+
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  
 });
 
 module.exports = router;
