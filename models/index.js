@@ -28,6 +28,16 @@ Comment.belongsTo(Post, {
   foreignKey: 'post_id',
 });
 
+//section
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+});
+
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+
 module.exports = { 
   User, 
   Gallery, 
