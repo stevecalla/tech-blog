@@ -2,7 +2,8 @@
   {{!-- <a href="/post/{{id}}"></a> --}}
     <div class="post-header">
       <h2 class="post-title">{{ title }}</h2>
-      <h2 class="post-author">Posted by Name Name on 5/8/2020</h2>
+      {{!-- <h2 class="post-author">Posted by Name Name on 5/8/2020</h2> --}}
+      <h2 class="post-author">Posted by {{ user.username }} on {{ format_date createdAt }}</h2>
     </div>
     <div>
       <p>{{ content }}</p>

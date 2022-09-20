@@ -124,7 +124,9 @@ router.get("/", middleware, async (req, res) => {
   console.log("GET ALL POSTS = ", req.session);
 
   try {
-    const dbPostData = await Post.findAll();
+    const dbPostData = await Post.findAll({
+      include: [{ model: User }]
+  });
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
@@ -149,9 +151,13 @@ router.get("/post/:id", middleware, async (req, res) => {
   // });
 
   try {
-    const dbPostData = await Post.findByPk(req.params.id);
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [{ model: User }]
+  });
 
     const posts = dbPostData.get({ plain: true });
+
+    console.log('post by id = ', posts);
 
     res.render("comment", { posts, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -168,7 +174,9 @@ router.get("/posts", middleware, async (req, res) => {
   });
 
   try {
-    const dbPostData = await Post.findAll();
+    const dbPostData = await Post.findAll({
+      include: [{ model: User }]
+  });
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
@@ -215,7 +223,7 @@ router.get("/comment/:id", middleware, async (req, res) => {
 
   try {
     const dbPostData = await Post.findByPk(req.params.id, {
-      include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }],
+      include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }, { model: User }],
     });
 
     const posts = dbPostData.get({ plain: true });
