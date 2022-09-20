@@ -1,6 +1,6 @@
 const router = require("express").Router();
 // const { nextTick } = require('process');
-const { Gallery, Painting, Post, Comment } = require("../models");
+const { Gallery, Painting, Post, Comment, User } = require("../models");
 // TODO: Import the custom middleware
 const middleware = require("../utils/auth");
 
@@ -215,16 +215,18 @@ router.get("/comment/:id", middleware, async (req, res) => {
 
   try {
     const dbPostData = await Post.findByPk(req.params.id, {
-      include: [{ model: Comment, where: { user_id: req.session.userId } }],
+      include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }],
     });
 
     const posts = dbPostData.get({ plain: true });
+    const comments = posts.comments;
 
-    console.log(posts);
+    console.log(posts, comments);
     // console.log(posts.comments);
 
     res.render("commentSaved", {
       posts,
+      comments,
       loggedIn: req.session.loggedIn,
       userId: req.session.userId,
     });
