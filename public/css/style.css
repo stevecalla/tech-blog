@@ -25,6 +25,10 @@ body {
   background-color: var(--quatrinary);
 }
 
+h1 {
+  font-size: 50px;
+}
+
 a {
   color: var(--dark);
   text-decoration: none;
@@ -58,16 +62,25 @@ nav {
   background-color: var(--background-main);
 }
 
-nav a {
+nav a,
+nav button {
   color: var(--light);
   padding: 14px 20px;
   text-decoration: none;
   text-align: center;
+  font-size: 28px;
 }
 
 nav a:hover {
   color: var(--secondary);
   background-color: var(--dark);
+}
+
+.login a {
+  border: none !important;
+  font-size: 26px;
+  text-decoration: none;
+  color: blue;
 }
 
 .post {
@@ -76,7 +89,7 @@ nav a:hover {
   justify-content: center;
   align-items: center;
   flex: 4;
-  padding: 50px;
+  padding: 25px;
   /* background-color: #fff; */
   background-color: var(--background-secondary);
   /* border: 3px solid black; */
@@ -98,13 +111,14 @@ nav a:hover {
   font-size: 100%;
   transition: color 0.1s;
   margin-left: 16px;
+  font-size: 28px;
 }
 
 .btn-custom {
   width: 100%;
   padding: 0.75rem;
   background-color: var(--quatrinary)!important;
-  font-size: 1.2rem;
+  font-size: 32px;
   /* margin-left: 5px; */
 }
 
@@ -173,7 +187,7 @@ nav a:hover {
 }
 
 hr {
-  margin: 0 5px;
+  margin: 0 50px;
 }
 
 .login-card {
@@ -218,10 +232,10 @@ hr {
   border-radius: 0.3rem;
 }
 
-.login a {
+/* .login a {
   text-decoration: underline;
   color: blue;
-}
+} */
 
 form i {
   position: fixed;
