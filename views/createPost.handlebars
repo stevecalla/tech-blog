@@ -3,19 +3,25 @@
   <form class="form login-form">
     <div class="form-group">
       <label for="post-title">Title</label>
-      <input class="form-input" type="text" id="post-title" />
+      {{!-- <input class="form-input" type="text" id="post-title" /> --}}
+
+      <textarea id="post-title" name="post-title" class="form-input" rows="1" cols="30";></textarea>
+
     </div>
     <div class="form-group">
       <label for="post-content">Content</label>
-      <input class="form-input" type="text" id="post-content" />
+      {{!-- <input class="form-input" type="text" id="post-content" /> --}}
+
+      <textarea id="post-content" name="post-content" class="form-input" rows="2" cols="30"></textarea>
+
     </div>
     <div class="form-group">
       <button class="btn btn-primary btn-custom" type="submit">Create</button>
     </div>
   </form>
-  <a href="/create-posts">
+  <a class="new-button-wrapper" href="/create-posts">
     <div class="">
-      <button class="btn post-header" type="submit">+ New Post</button>
+      <button class="new-button" type="submit">+ New Post</button>
     </div>
   </a>
 </div>

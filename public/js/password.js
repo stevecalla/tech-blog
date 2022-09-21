@@ -18,4 +18,5 @@ const togglePassword = document.querySelector('#toggle-password');
     );
 });
 
-//source: https://www.csestack.org/hide-show-password-eye-icon-html-javascript/
+//source: 
+//https://www.csestack.org/hide-show-password-eye-icon-html-javascript/

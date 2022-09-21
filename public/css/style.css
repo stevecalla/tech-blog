@@ -26,7 +26,7 @@ body {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 42px;
 }
 
 a {
@@ -42,7 +42,13 @@ p {
   padding-left: 5px;
 }
 
+main {
+  height: 80vh;
+  overflow: scroll;
+}
+
 header {
+  height: 20vh;
   padding: 40px;
   text-align: center;
   /* background: var(--primary); */
@@ -81,6 +87,10 @@ nav a:hover {
   font-size: 26px;
   text-decoration: none;
   color: blue;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .post {
@@ -134,13 +144,13 @@ nav a:hover {
 }
 
 .new-button {
-  height: 75px;
+  height: 50px;
   width: 200px;
   border: 3px solid black;
   border-radius: 0.3rem;
   background-color: var(--background-main);
   color: var(--light);
-  font-size: 32px;
+  font-size: 26px;
 }
 
 /* img {
@@ -223,10 +233,14 @@ hr {
 
 .post-wrapper {
   width: 100%;
-  height: 400px;
+  /* height: 400px; */
+  height: 500px;
+  border: 3px solid black;
+  overflow: scroll;
 }
 
 .post-title {
+  margin: 0 5px 0 5px;
   background-color: gray;
   border: none !important;
   border-radius: 0.3rem;
@@ -289,4 +303,29 @@ form i {
   flex-flow: column wrap;
   align-content: flex-start;
   align-items: center;
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+/* LARGE SCREENS / TABLETS */
+@media screen and (max-width: 1023px) {
+  .full-screen {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 38px;
+  }
+
+  nav {
+    justify-content: center;
+  }
+  
+  nav a,
+  nav button {
+    font-size: 24px !important;
+  }
+
+
 }

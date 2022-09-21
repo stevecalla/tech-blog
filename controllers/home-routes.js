@@ -154,8 +154,8 @@ router.post("/comment", middleware, async (req, res) => {
   }
 });
 
-// RENDER SAVED COMMENTS
-// router.get("/comment/:id", middleware, async (req, res) => {
+// RENDER SAVED COMMENTS //todo remove
+router.get("/comment/:id", middleware, async (req, res) => {
 //   console.log("AAAAAAAAAAAAA =====", req.params);
 
 //   try {
@@ -179,7 +179,7 @@ router.post("/comment", middleware, async (req, res) => {
 //     console.log(err);
 //     res.status(500).json(err);
 //   }
-// });
+});
 
 // FETCH ALL POSTS FOR CURRENT SESSION USER
 router.get("/user-posts/", middleware, async (req, res) => {
@@ -219,7 +219,7 @@ router.get("/create-posts/", middleware, async (req, res) => {
 });
 
 // RENDER POST TO BE EDITED OR DELETED //TODO CHANGE TO EDIT POST
-router.get("/update-posts/:id", middleware, async (req, res) => {
+router.get("/edit-posts/:id", middleware, async (req, res) => {
 
   console.log('update post id AAAA = ', req.params.id);
 
@@ -235,7 +235,7 @@ router.get("/update-posts/:id", middleware, async (req, res) => {
 
     console.log('update post data = ', post);
 
-    res.render('updatePost', {
+    res.render('editPost', {
       post,
       loggedIn: req.session.loggedIn,
       dashboard: req.session.dashboard = true,
