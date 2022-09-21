@@ -248,8 +248,6 @@ router.put("/update/:id", middleware, async (req, res) => {
 
   console.log('update put id = ', req.params.id);
 
-  // res.send('hello')
-
   try {
     const updatedPost = await Post.update({ title: req.body.title, content: req.body.content }, {
       where: {
