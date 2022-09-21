@@ -173,7 +173,9 @@ img {
 }
 
 form i {
-  margin-left: -50px;
+  position: fixed;
+  margin-left: -45px;
+  margin-top: 25px;
   cursor: pointer;
 }
 
