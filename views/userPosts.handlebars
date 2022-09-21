@@ -1,12 +1,14 @@
 <section class="container">
+  <div class="post-wrapper">
   {{#each posts as |post|}}
-    <a href="/update-posts/{{ id }}">
+    <a class="post-title" href="/update-posts/{{ id }}">
       {{> user-details}}
     </a>
   {{/each}}
-  <a href="/create-posts">
+  </div>
+  <a class="new-button-wrapper" href="/create-posts">
     <div class="">
-      <button class="btn post-header" type="submit">+ New Post</button>
+      <button class="new-button" type="submit">+ New Post</button>
     </div>
   </a>
 </section>
