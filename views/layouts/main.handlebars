@@ -4,16 +4,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Museum</title>
+  <title>TECH BLOG</title>
+
   <link rel="stylesheet" type="text/css" href="/css/jass.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+  {{!-- ADD FONTAWESOME --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
 </head>
 
 <body>
   <header>
   <nav>
     <a href="/">Home</a>
-    <a href="/posts">Dashboard</a>
+    {{!-- <a href="/posts">Dashboard</a> --}}
+    <a href="/user-posts">Dashboard</a>
     {{#if loggedIn}}
     <button id="logout" class="btn-no-style">Logout</button>
     {{else}}

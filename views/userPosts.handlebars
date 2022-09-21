@@ -1,0 +1,12 @@
+<section class="container">
+  {{#each posts as |post|}}
+    <a href="/update-posts/{{ id }}">
+      {{> user-details}}
+    </a>
+  {{/each}}
+  <a href="/create-posts">
+    <div class="">
+      <button class="btn post-header" type="submit">+ New Post</button>
+    </div>
+  </a>
+</section>

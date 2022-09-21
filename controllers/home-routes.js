@@ -1,7 +1,6 @@
 const router = require("express").Router();
 // const { nextTick } = require('process');
 const { Gallery, Painting, Post, Comment, User } = require("../models");
-// TODO: Import the custom middleware
 const middleware = require("../utils/auth");
 
 // GET all galleries for homepage
@@ -67,7 +66,6 @@ router.get("/gallery/:id", middleware, async (req, res) => {
 });
 
 // GET one painting
-// TODO: Replace the logic below with the custom middleware
 router.get("/painting/:id", middleware, async (req, res) => {
   // section middleware in above line replaces original if else logic
 
@@ -169,9 +167,9 @@ router.get("/post/:id", middleware, async (req, res) => {
 router.get("/posts", middleware, async (req, res) => {
   console.log("dashboard = ", req.session);
 
-  req.session.save(() => {
-    req.session.dashboard = true;
-  });
+  // req.session.save(() => {
+  //   req.session.dashboard = true;
+  // });
 
   try {
     const dbPostData = await Post.findAll({
@@ -240,6 +238,131 @@ router.get("/comment/:id", middleware, async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/user-posts/", middleware, async (req, res) => {
+  try {
+    const dbPostData = await Post.findAll({
+      include: [{ model: User }],
+      where: { user_id: req.session.userId }
+    });
+
+    req.session.save(() => {
+      req.session.dashboard = true;
+    });
+
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+    console.log(posts);
+
+    res.render("userPosts", { 
+      posts, 
+      loggedIn: req.session.loggedIn,
+      dashboard: req.session.dashboard = true,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/create-posts/", middleware, async (req, res) => {
+  res.render("createPost", {
+    loggedIn: req.session.loggedIn ,
+    dashboard: req.session.dashboard = true,
+  });
+});
+
+router.get("/update-posts/:id", middleware, async (req, res) => {
+
+  console.log('update post id AAAA = ', req.params.id);
+
+  try{ 
+    const postData = await Post.findByPk(req.params.id);
+    
+    if(!postData) {
+        res.status(404).json({message: 'No post with this id!'});
+        return;
+    };
+
+    const post = postData.get({ plain: true });
+
+    console.log('update post data = ', post);
+
+    res.render('updatePost', {
+      post,
+      loggedIn: req.session.loggedIn,
+      dashboard: req.session.dashboard = true,
+    });
+
+  } catch (err) {
+      res.status(500).json(err);
+  }; 
+});
+
+router.post('/create-post', async (req, res) => {
+
+  console.log('create post = ', req.body);
+
+  try {
+    const dbPostData = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      user_id: req.session.userId,
+    });
+
+    res.status(200).json(dbPostData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.put("/update/:id", middleware, async (req, res) => {
+
+  console.log('update put id = ', req.params.id);
+
+  // res.send('hello')
+
+  try {
+    const updatedPost = await Post.update({ title: req.body.title, content: req.body.content }, {
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if (!updatedPost || updatedPost[0] === 0) {
+      res.status(404).json({ message: 'Can\'t update. No product found with that id!' });
+      return;
+    }
+
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete("/delete/:id", middleware, async (req, res) => {
+
+  console.log('update delete id = ', req.params.id);
+
+  try {
+    const deletedPost = await Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if (!deletedPost || deletedPost[0] === 0) {
+      res.status(404).json({ message: 'Can\'t delete. No product found with that id!' });
+      return;
+    }
+
+    res.status(200).json(deletedPost);
+  } catch (err) {
     res.status(500).json(err);
   }
 });
