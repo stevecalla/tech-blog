@@ -3,84 +3,6 @@ const router = require("express").Router();
 const { Gallery, Painting, Post, Comment, User } = require("../models");
 const middleware = require("../utils/auth");
 
-// GET all galleries for homepage
-// router.get('/', async (req, res) => {
-
-//   console.log('GET ALL = ', req.session);
-
-//   try {
-//     const dbGalleryData = await Gallery.findAll({
-//       include: [
-//         {
-//           model: Painting,
-//           attributes: ['filename', 'description'],
-//         },
-//       ],
-//     });
-
-//     const galleries = dbGalleryData.map((gallery) =>
-//       gallery.get({ plain: true })
-//     );
-
-//     console.log(galleries);
-
-//     res.render('homepage', {
-//       galleries,
-//       loggedIn: req.session.loggedIn,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-
-// GET one gallery
-
-// TODO: Replace the logic below with the custom middleware
-router.get("/gallery/:id", middleware, async (req, res) => {
-  // section middleware in above line replaces original if else logic
-  // middleware(req, res); //section also did it this way
-
-  try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
-      include: [
-        {
-          model: Painting,
-          attributes: [
-            "id",
-            "title",
-            "artist",
-            "exhibition_date",
-            "filename",
-            "description",
-          ],
-        },
-      ],
-    });
-    const gallery = dbGalleryData.get({ plain: true });
-    res.render("gallery", { gallery, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// GET one painting
-router.get("/painting/:id", middleware, async (req, res) => {
-  // section middleware in above line replaces original if else logic
-
-  try {
-    const dbPaintingData = await Painting.findByPk(req.params.id);
-
-    const painting = dbPaintingData.get({ plain: true });
-
-    res.render("painting", { painting, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
 router.get("/login", (req, res) => {
   console.log("login = ", req, req.session);
 
@@ -265,6 +187,7 @@ router.get("/user-posts/", middleware, async (req, res) => {
 
   } catch (err) {
     console.log(err);
+    console.log('--------HHHHHHHHHHHHHHH---------')
     res.status(500).json(err);
   }
 });
