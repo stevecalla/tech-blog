@@ -12,7 +12,7 @@
 }
 
 * {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 body {
@@ -48,14 +48,6 @@ main {
   flex-grow: 1;
 }
 
-/* aside {
-  flex: 0;
-  background-color: var(--tertiary);
-  padding: 80px;
-  text-align: left;
-  color: var(--light);
-} */
-
 nav {
   display: flex;
   /* background-color: var(--secondary); */
@@ -74,15 +66,22 @@ nav a:hover {
   background-color: var(--dark);
 }
 
-.gallery {
-  flex: 4;
-  /* background-color: #fff; */
-  background-color: var(--background-secondary);
-  padding: 50px;
+.post {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  flex: 4;
+  padding: 50px;
+  /* background-color: #fff; */
+  background-color: var(--background-secondary);
+  /* border: 3px solid black; */
+}
+
+.post a,
+.post-card {
+  margin: 5px;
+  border: 3px solid black;
 }
 
 .btn-no-style {
@@ -109,7 +108,7 @@ img {
   height: auto;
 }
 
-.painting {
+/* .painting {
   width: 50%;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -120,7 +119,7 @@ img {
   text-align: center;
   padding: 10px 20px;
   font-weight: bold;
-}
+} */
 
 /* CARDS */
 .card {
@@ -179,7 +178,7 @@ form i {
 }
 
 .password-login {
-  width: 99.5%;
+  width: 99%;
   padding: 0.75rem;
   color: #1a1a1a;
   background-color: #ffffff;
@@ -187,6 +186,7 @@ form i {
   font-size: 1.2rem;
   border: 1px solid #484848;
   border-radius: 0.3rem;
+  margin-left: 3px;
 }
 
 .card header {
@@ -205,7 +205,7 @@ form i {
   font-weight: bold;
 }
 
-.gallery-name {
+/* .gallery-name {
   text-transform: uppercase;
   letter-spacing: 3px;
   text-shadow: 2px 2px 5px var(--secondary);
@@ -214,7 +214,7 @@ form i {
   padding-bottom: 30px;
   padding-right: 100px;
   padding-left: 100px;
-}
+} */
 
 /* LAYOUT */
 .container {

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 // const { nextTick } = require('process');
-const { Gallery, Painting, Post, Comment, User } = require("../models");
+const { Post, Comment, User } = require("../models");
 const middleware = require("../utils/auth");
 
 // REDIRECT TO HOME PAGE AFTER LOGIN
