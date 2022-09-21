@@ -278,7 +278,7 @@ router.get("/create-posts/", middleware, async (req, res) => {
 
 router.get("/update-posts/:id", middleware, async (req, res) => {
 
-  console.log('update post id = ', req.params.id);
+  console.log('update post id AAAA = ', req.params.id);
 
   try{ 
     const postData = await Post.findByPk(req.params.id);
@@ -343,7 +343,28 @@ router.put("/update/:id", middleware, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  
+});
+
+router.delete("/delete/:id", middleware, async (req, res) => {
+
+  console.log('update delete id = ', req.params.id);
+
+  try {
+    const deletedPost = await Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if (!deletedPost || deletedPost[0] === 0) {
+      res.status(404).json({ message: 'Can\'t delete. No product found with that id!' });
+      return;
+    }
+
+    res.status(200).json(deletedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

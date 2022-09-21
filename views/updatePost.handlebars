@@ -1,5 +1,5 @@
 <div class="login-card">
-  <h2 class="login-title">Create New Post</h2>
+  <h2 class="login-title">Edit Post</h2>
   <form class="form login-form">
     <div class="form-group">
       <label for="post-title">Title</label>
@@ -18,17 +18,17 @@
       
     </div>
 
-    <div class="form-group">
-      <button class="btn btn-primary btn-custom" type="submit">Update Post</button>
+    <div class="form-group" id="update-button">
+      <button id="update-button" class="btn btn-primary btn-custom update-button" type="submit">Update Post</button>
     </div>
 
-    {{!-- <div class="form-group">
-      <button class="btn btn-primary btn-custom" type="submit">Delete Post</button>
-    </div> --}}
+    <div class="form-group">
+      <button id='delete-button' class="btn btn-primary btn-custom delete-button" type="submit">Delete Post</button>
+    </div>
 
   </form>
 </div>
 
-<script src="http://localhost:3001/js/updatePost.js"></script>
-{{!-- <script src=".js/updatePost.js"></script> --}}
+{{!-- <script src="http://localhost:3001/js/updatePost.js"></script> --}}
+<script src="/js/updatePost.js"></script>
 
