@@ -5,6 +5,7 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
+  // CREATE NEW USER BY POSTING TO API/USERS/
   if (username && email && password) {
     const response = await fetch('/api/users', {
       method: 'POST',
@@ -18,6 +19,15 @@ const signupFormHandler = async (event) => {
       alert('Failed to sign up.');
     }
   }
+
+  //FETCH USER ID FOR NEW USER THEN POST TO REQ.SESSION.USERID
+  if (username && email && password) {
+    const response = await fetch('/api/users/userid', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+  };
 };
 
 document
