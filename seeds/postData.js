@@ -1,51 +1,108 @@
-const { Post } = require('../models');
+const { Post } = require("../models");
+
+// const postdata = [
+//   {
+//     title: "Cosmos Flowers 1",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 1,
+//   },
+//   {
+//     title: "Cosmos Flowers 2",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 1,
+//   },
+//   {
+//     title: "Cosmos Flowers 3",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 1,
+//   },
+//   {
+//     title: "Cosmos Flowers 4",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 3,
+//   },
+//   {
+//     title: "Cosmos Flowers 5",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 1,
+//   },
+//   {
+//     title: "Cosmos Flowers 6",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 2,
+//   },
+//   {
+//     title: "Cosmos Flowers 7",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 1,
+//   },
+//   {
+//     title: "Cosmos Flowers 8",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 2,
+//   },
+//   {
+//     title: "Cosmos Flowers 9",
+//     content: "Branches with pink apricot blossoms against a blue background.",
+//     user_id: 3,
+//   },
+// ];
 
 const postdata = [
   {
-
-    title: 'Cosmos Flowers 1',
-    content: 'Branches with pink apricot blossoms against a blue background.',
+    title: "Wolf, mexican",
+    content: "sed accumsan felis ut at dolor quis odio",
     user_id: 1,
   },
   {
-    title: 'Cosmos Flowers 2',
-    content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
-  },
-  {
-    title: 'Cosmos Flowers 3',
-    content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
-  },
-  {
-    title: 'Cosmos Flowers 4',
-    content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 3,
-  },
-  {
-    title: 'Cosmos Flowers 5',
-    content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
-  },
-  {
-    title: 'Cosmos Flowers 6',
-    content: 'Branches with pink apricot blossoms against a blue background.',
+    title: "Otter, canadian river",
+    content: "quam nec dui luctus rutrum nulla",
     user_id: 2,
   },
   {
-    title: 'Cosmos Flowers 7',
-    content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 1,
-  },
-  {
-    title: 'Cosmos Flowers 8',
-    content: 'Branches with pink apricot blossoms against a blue background.',
-    user_id: 2,
-  },
-  {
-    title: 'Cosmos Flowers 9',
-    content: 'Branches with pink apricot blossoms against a blue background.',
+    title: "Creeper, black-tailed tree",
+    content:
+      "cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui",
     user_id: 3,
+  },
+  {
+    title: "Crab (unidentified)",
+    content:
+      "orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi",
+    user_id: 4,
+  },
+  {
+    title: "Common wolf",
+    content: "purus eu magna vulputate luctus cum",
+    user_id: 5,
+  },
+  {
+    title: "Tortoise, burmese black mountain",
+    content: "duis faucibus accumsan odio curabitur",
+    user_id: 6,
+  },
+  {
+    title: "Greater rhea",
+    content:
+      "ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus",
+    user_id: 7,
+  },
+  {
+    title: "Sugar glider",
+    content:
+      "id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec",
+    user_id: 8,
+  },
+  {
+    title: "Defassa waterbuck",
+    content: "in quis justo maecenas rhoncus aliquam lacus",
+    user_id: 9,
+  },
+  {
+    title: "Black-tailed prairie dog",
+    content:
+      "parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum",
+    user_id: 10,
   },
 ];
 

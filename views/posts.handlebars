@@ -1,20 +1,7 @@
 <section class="container">
-  {{!-- <a href="/post/{{id}}"> --}}
-  {{!-- <a href="/post/abc"> --}}
-    {{#each posts as |post|}}
-      <a href="/post/{{id}}">
-      {{!-- <a href="/post/abc"> --}}
-        {{> post-details}}
-      </a>
-    {{/each}}
-  {{!-- </a> --}}
+  {{#each posts as |post|}}
+    <a href="/post/{{id}}">
+      {{> post-details}}
+    </a>
+  {{/each}}
 </section>
-
-{{!-- <section class=""> --}}
-  {{!-- <a href="/post/{{id}}"> --}}
-  {{!-- <a href="/post/abc"> --}}
-    {{!-- {{#each gallery.paintings as |painting|}} --}}
-    {{!-- {{> post-details}} --}}
-    {{!-- {{/each}} --}}
-  {{!-- </a>
-</section> --}}

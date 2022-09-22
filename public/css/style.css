@@ -12,7 +12,7 @@
 }
 
 * {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 body {
@@ -25,6 +25,10 @@ body {
   background-color: var(--quatrinary);
 }
 
+h1 {
+  font-size: 42px;
+}
+
 a {
   color: var(--dark);
   text-decoration: none;
@@ -34,8 +38,18 @@ a:visited {
   color: inherit;
 }
 
+p {
+  padding-left: 5px;
+}
+
+main {
+  height: 80vh;
+  overflow: scroll;
+}
+
 header {
-  padding: 40px;
+  height: 20vh;
+  padding: 20px;
   text-align: center;
   /* background: var(--primary); */
   background-color: var(--background-main);
@@ -48,25 +62,19 @@ main {
   flex-grow: 1;
 }
 
-/* aside {
-  flex: 0;
-  background-color: var(--tertiary);
-  padding: 80px;
-  text-align: left;
-  color: var(--light);
-} */
-
 nav {
   display: flex;
   /* background-color: var(--secondary); */
   background-color: var(--background-main);
 }
 
-nav a {
+nav a,
+nav button {
   color: var(--light);
   padding: 14px 20px;
   text-decoration: none;
   text-align: center;
+  font-size: 28px;
 }
 
 nav a:hover {
@@ -74,15 +82,33 @@ nav a:hover {
   background-color: var(--dark);
 }
 
-.gallery {
-  flex: 4;
-  /* background-color: #fff; */
-  background-color: var(--background-secondary);
-  padding: 50px;
+.login a {
+  border: none !important;
+  font-size: 26px;
+  text-decoration: none;
+  color: blue;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.post {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  flex: 4;
+  padding: 25px;
+  /* background-color: #fff; */
+  background-color: var(--background-secondary);
+  /* border: 3px solid black; */
+}
+
+.post a,
+.post-card {
+  margin: 5px;
+  border: 3px solid black;
 }
 
 .btn-no-style {
@@ -95,21 +121,44 @@ nav a:hover {
   font-size: 100%;
   transition: color 0.1s;
   margin-left: 16px;
+  font-size: 28px;
 }
 
 .btn-custom {
   width: 100%;
   padding: 0.75rem;
   background-color: var(--quatrinary)!important;
-  font-size: 1.2rem;
+  font-size: 32px;
+  /* margin-left: 5px; */
 }
 
-img {
+.comment-button {
+  width: 98%;
+  margin-left: 5px;
+}
+
+.new-button-wrapper {
+  display: flex;
+  justify-content: center;
+  border: none !important;
+}
+
+.new-button {
+  height: 50px;
+  width: 200px;
+  border: 3px solid black;
+  border-radius: 0.3rem;
+  background-color: var(--background-main);
+  color: var(--light);
+  font-size: 26px;
+}
+
+/* img {
   max-width: 100%;
   height: auto;
-}
+} */
 
-.painting {
+/* .painting {
   width: 50%;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -120,7 +169,7 @@ img {
   text-align: center;
   padding: 10px 20px;
   font-weight: bold;
-}
+} */
 
 /* CARDS */
 .card {
@@ -135,6 +184,20 @@ img {
 .container a,
 .post-card {
   width: 100%;
+}
+
+.comment-wrapper {
+  height: 200px;
+  overflow: scroll;
+}
+
+.comment-input {
+  width: 98% !important;
+  margin-left: 5px !important;
+}
+
+hr {
+  margin: 0 50px;
 }
 
 .login-card {
@@ -168,18 +231,30 @@ img {
   font-weight: 400;
 }
 
-.login a {
-  text-decoration: underline;
-  color: blue;
+.post-wrapper {
+  width: 100%;
+  /* height: 400px; */
+  height: 500px;
+  border: 3px solid black;
+  overflow: scroll;
+}
+
+.post-title {
+  margin: 0 5px 0 5px;
+  background-color: gray;
+  border: none !important;
+  border-radius: 0.3rem;
 }
 
 form i {
-  margin-left: -50px;
+  position: fixed;
+  margin-left: -45px;
+  margin-top: 25px;
   cursor: pointer;
 }
 
 .password-login {
-  width: 99.5%;
+  width: 99%;
   padding: 0.75rem;
   color: #1a1a1a;
   background-color: #ffffff;
@@ -187,6 +262,7 @@ form i {
   font-size: 1.2rem;
   border: 1px solid #484848;
   border-radius: 0.3rem;
+  margin-left: 3px;
 }
 
 .card header {
@@ -205,7 +281,7 @@ form i {
   font-weight: bold;
 }
 
-.gallery-name {
+/* .gallery-name {
   text-transform: uppercase;
   letter-spacing: 3px;
   text-shadow: 2px 2px 5px var(--secondary);
@@ -214,7 +290,7 @@ form i {
   padding-bottom: 30px;
   padding-right: 100px;
   padding-left: 100px;
-}
+} */
 
 /* LAYOUT */
 .container {
@@ -222,4 +298,29 @@ form i {
   flex-flow: column wrap;
   align-content: flex-start;
   align-items: center;
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+/* LARGE SCREENS / TABLETS */
+@media screen and (max-width: 1023px) {
+  .full-screen {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 38px;
+  }
+
+  nav {
+    justify-content: center;
+  }
+  
+  nav a,
+  nav button {
+    font-size: 24px !important;
+  }
+
+
 }
