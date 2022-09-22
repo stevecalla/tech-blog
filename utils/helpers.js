@@ -14,6 +14,4 @@ module.exports = {
   trim_content: (content) => {
     return content.trim();
   },
-
-
 };
