@@ -1,9 +1,9 @@
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector('#username-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const username = document.querySelector('#username-input').value.trim();
+  const email = document.querySelector('#email-input').value.trim();
+  const password = document.querySelector('#password-input').value.trim();
 
   // CREATE NEW USER BY POSTING TO API/USERS/
   if (username && email && password) {

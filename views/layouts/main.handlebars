@@ -1,49 +1,45 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TECH BLOG</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TECH BLOG</title>
 
-  <link rel="stylesheet" type="text/css" href="/css/jass.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/jass.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
-  {{!-- ADD FONTAWESOME --}}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-
-</head>
-
-<body>
-  <header>
-  <nav>
-    <a href="/">Home</a>
-    {{!-- <a href="/posts">Dashboard</a> --}}
-    <a href="/user-posts">Dashboard</a>
+    {{! ADD FONTAWESOME }}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/user-posts">Dashboard</a>
+        {{#if loggedIn}}
+          <button id="logout" class="btn-no-style">Logout</button>
+        {{else}}
+          <a href="/login">Login</a>
+        {{/if}}
+      </nav>
+      <div class="header">
+        {{#if dashboard}}
+          <h1>Your Dashboard</h1>
+        {{else}}
+          <h1>The Tech Blog</h1>
+        {{/if}}
+      </div>
+    </header>
+    <main>
+      <div class="post">
+        {{{body}}}
+      </div>
+    </main>
     {{#if loggedIn}}
-    <button id="logout" class="btn-no-style">Logout</button>
-    {{else}}
-    <a href="/login">Login</a>
+      <script src="/js/logout.js"></script>
     {{/if}}
-  </nav>
-    {{#if dashboard}}
-    <h1>Your Dashboard</h1>
-    {{else}}
-    <h1>The Tech Blog</h1>
-    {{/if}}
-    {{!-- <h1>The Tech Blog</h1> --}}
-  </header>
-  <main>
-    {{!-- <aside>
-      <h2>Enjoy the galleries!</h2>
-    </aside> --}}
-    <div class="post">
-      {{{body}}}
-    </div>
-  </main>
-  {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
-</body>
-
+  </body>
 </html>

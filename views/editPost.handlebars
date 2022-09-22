@@ -1,21 +1,10 @@
 <div class="login-card">
   <h2 class="login-title">Edit Post</h2>
   <form class="form login-form">
-    <div class="form-group">
-      <label for="post-title">Title</label>
-      <textarea id="post-title" name="post-title" class="form-input" rows="1" cols="30";>{{ post.title }}</textarea>
-    </div>
-    <div class="form-group">
-      <label for="post-content">Content</label>
-      <textarea id="post-content" name="post-content" class="form-input" rows="2" cols="30">{{ post.content }}</textarea>
-    </div>
-    <div class="form-group" id="update-button">
-      <button id="update-button" class="btn btn-primary btn-custom update-button" type="submit">Update Post</button>
-    </div>
-    <div class="form-group">
-      <button id='delete-button' class="btn btn-primary btn-custom delete-button" type="submit">Delete Post</button>
-    </div>
-
+    {{> title-input }}
+    {{> content-input }}
+    {{> submit-button content="Update Post" class="update-button" id="update-button"}}   
+    {{> submit-button content="Delete Post" class="delete-button" id="delete-button"}}  
   </form>
 </div>
 

@@ -1,22 +1,12 @@
 <div class="login-card">
   <h2 class="login-title">Login</h2>
   <form class="form login-form">
-    <div class="form-group">
-      <label for="email-login">Email:</label>
-      <input class="password-login" type="text" id="email-login" />
-    </div>
-    <div class="form-group">
-      <label for="password-login">Password:</label>
-      <input class="password-login" type="password" name="password" autocomplete="current-password" required="" id="password-login">
-      <i class="far fa-eye-slash" id="toggle-password"></i>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary btn-custom" type="submit">Login!</button>
-    </div>
-    <div class="login">
-      <a href="/signup">Sign up instead</a>
-    </div>
+    {{> email-input}}
+    {{> password-input}}
+
+    {{> submit-button content="Login!"}}
   </form>
+  {{> login-link link="signup" content="Sign up instead"}}
 </div>
 
 <script src="./js/password.js"></script>
