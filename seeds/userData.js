@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 //get password hash b/c bulk create is not hashing the password
 // let passwordCrypt = async (pass) => {
 //   let b = await bcrypt.hash(pass, 10);
-//   console.log('hashed password 1 = ', b);
 //   return b;
 // }
 // passwordCrypt('password1234');

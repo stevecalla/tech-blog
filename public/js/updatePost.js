@@ -20,8 +20,6 @@ const editPostFormHandler = async (event) => {
         headers: { 'Content-Type': 'application/json' },
       })
     } else {
-      console.log('else delete statement');
-      
       response = await fetch('/delete/' + id, { 
         method: 'DELETE' 
       }); 
