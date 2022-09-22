@@ -49,7 +49,7 @@ main {
 
 header {
   height: 20vh;
-  padding: 40px;
+  padding: 20px;
   text-align: center;
   /* background: var(--primary); */
   background-color: var(--background-main);
