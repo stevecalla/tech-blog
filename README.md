@@ -75,7 +75,7 @@ This app can be enhanced by (a) using/adding dates such as created at, updated a
 
 This video shows - the category routes including get all categories, get single category by id, post (add a new category), put (update a category by id), delete a category by id.
 
-![In Insomnia, the user tests “GET tags,” “GET Categories,” and “GET All Products.”.](public/images/powder-bound.gif)
+![In Insomnia, the user tests “GET tags,” “GET Categories,” and “GET All Products.”.](public/images/tech-blog-video.gif)
 
 <!-- <img src="public/images/powder-bound.gif" width="" height=""/> -->
 

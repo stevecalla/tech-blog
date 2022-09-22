@@ -23,7 +23,9 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/", middleware, async (req, res) => {
+// router.get("/", middleware, async (req, res) => {
+router.get("/", async (req, res) => {
+  
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }]
