@@ -6,9 +6,6 @@ const commentFormHandler = async (event) => {
   const postId = parseInt(commentPostId.dataset.post);
 
   if (comment) {
-    console.log(comment, commentPostId.dataset.post, postId);
-
-    // const response = await fetch('/comment', {
     const response = await fetch('/comment', {
       method: 'POST',
       body: JSON.stringify({ comment, postId }),

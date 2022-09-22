@@ -5,8 +5,6 @@ const middleware = require("../utils/auth");
 
 // REDIRECT TO HOME PAGE AFTER LOGIN
 router.get("/login", (req, res) => {
-  console.log("login = ", req, req.session);
-
   if (req.session.loggedIn) {
     res.redirect("/");
     return;
@@ -17,8 +15,6 @@ router.get("/login", (req, res) => {
 
 // REDIRECT TO HOMEPAGE AFTER NEW USER IS CREATED / SIGNED UP
 router.get("/signup", (req, res) => {
-  console.log("signup = ", req.session);
-
   if (req.session.loggedIn) {
     res.redirect("/");
     return;
@@ -27,12 +23,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// router.get('/posts', middleware, async (req, res) => {
 router.get("/", middleware, async (req, res) => {
-
-  console.log("dashboard = ", req.session);
-  console.log("GET ALL POSTS = ", req.session);
-
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }]
@@ -40,9 +31,6 @@ router.get("/", middleware, async (req, res) => {
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-    console.log(posts);
-
-    // res.render('posts', {
     res.render("homepage", {
       posts,
       loggedIn: req.session.loggedIn,
@@ -61,8 +49,6 @@ router.get("/post/:id", middleware, async (req, res) => {
   // });
 
   //   const posts = dbPostData.get({ plain: true });
-
-  //   console.log('post by id = ', posts);
 
   //   res.render("comment", {
   //     posts,
@@ -86,9 +72,6 @@ router.get("/post/:id", middleware, async (req, res) => {
     const posts = dbPostData.get({ plain: true });
     const comments = posts.comments;
 
-    console.log(posts, comments);
-    // console.log(posts.comments);
-
     res.render("commentSaved", {
       posts,
       comments,
@@ -102,12 +85,6 @@ router.get("/post/:id", middleware, async (req, res) => {
 });
 
 router.get("/posts", middleware, async (req, res) => {
-  console.log("dashboard = ", req.session);
-
-  // req.session.save(() => {
-  //   req.session.dashboard = true;
-  // });
-
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }]
@@ -115,9 +92,6 @@ router.get("/posts", middleware, async (req, res) => {
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-    console.log(posts);
-
-    // res.render('posts', {
     res.render("homepage", {
       posts,
       loggedIn: req.session.loggedIn,
@@ -131,23 +105,14 @@ router.get("/posts", middleware, async (req, res) => {
 
 // CREATE AND SAVE COMMENT
 router.post("/comment", middleware, async (req, res) => {
-  console.log("comment = ", req.session);
-
-  // CREATE new comment
-  console.log(req.body);
-
   try {
     const dbCommentData = await Comment.create({
       content: req.body.comment,
       user_id: req.session.userId,
       post_id: req.body.postId,
     });
-
-    // console.log('1 ====== HHHHHHHHHHHHHHHHHH')
-
     res.status(200).json(dbCommentData);
 
-    // console.log('2 ====== HHHHHHHHHHHHHHHHHH')
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -156,8 +121,6 @@ router.post("/comment", middleware, async (req, res) => {
 
 // RENDER SAVED COMMENTS //todo remove
 router.get("/comment/:id", middleware, async (req, res) => {
-//   console.log("AAAAAAAAAAAAA =====", req.params);
-
 //   try {
 //     const dbPostData = await Post.findByPk(req.params.id, {
 //       include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }, { model: User }],
@@ -165,9 +128,6 @@ router.get("/comment/:id", middleware, async (req, res) => {
 
 //     const posts = dbPostData.get({ plain: true });
 //     const comments = posts.comments;
-
-//     console.log(posts, comments);
-//     // console.log(posts.comments);
 
 //     res.render("commentSaved", {
 //       posts,
@@ -195,8 +155,6 @@ router.get("/user-posts/", middleware, async (req, res) => {
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-    console.log(posts);
-
     res.render("userPosts", { 
       posts, 
       loggedIn: req.session.loggedIn,
@@ -205,7 +163,6 @@ router.get("/user-posts/", middleware, async (req, res) => {
 
   } catch (err) {
     console.log(err);
-    console.log('--------HHHHHHHHHHHHHHH---------')
     res.status(500).json(err);
   }
 });
@@ -218,11 +175,8 @@ router.get("/create-posts/", middleware, async (req, res) => {
   });
 });
 
-// RENDER POST TO BE EDITED OR DELETED //TODO CHANGE TO EDIT POST
+// RENDER POST TO BE EDITED OR DELETED
 router.get("/edit-posts/:id", middleware, async (req, res) => {
-
-  console.log('update post id AAAA = ', req.params.id);
-
   try{ 
     const postData = await Post.findByPk(req.params.id);
     
@@ -232,8 +186,6 @@ router.get("/edit-posts/:id", middleware, async (req, res) => {
     };
 
     const post = postData.get({ plain: true });
-
-    console.log('update post data = ', post);
 
     res.render('editPost', {
       post,
@@ -248,9 +200,6 @@ router.get("/edit-posts/:id", middleware, async (req, res) => {
 
 // ADD POST TO THE POST TABLE IN THE BLOG DATABASE
 router.post('/create-post', async (req, res) => {
-
-  console.log('create post = ', req.body);
-
   try {
     const dbPostData = await Post.create({
       title: req.body.title,
@@ -267,9 +216,6 @@ router.post('/create-post', async (req, res) => {
 
 // UPDATE POST BASED ON EDITS PROVIDED BY USER
 router.put("/update/:id", middleware, async (req, res) => {
-
-  console.log('update put id = ', req.params.id);
-
   try {
     const updatedPost = await Post.update({ title: req.body.title, content: req.body.content }, {
       where: {
@@ -290,9 +236,6 @@ router.put("/update/:id", middleware, async (req, res) => {
 
 // DELETE POST BASED ON REQUEST BY USER
 router.delete("/delete/:id", middleware, async (req, res) => {
-
-  console.log('update delete id = ', req.params.id);
-
   try {
     const deletedPost = await Post.destroy({
       where: {
