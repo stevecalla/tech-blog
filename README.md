@@ -71,7 +71,7 @@ This app can be enhanced by (a) using/adding dates such as created at, updated a
 
 ## App Preview - WalkThrough Videos
 
-[Link to Setup Video](https://www.youtube.com/watch?v=zZlf6Svef_c)
+[Link to Setup Video](https://youtu.be/GVZ9KZithiY)
 
 This video shows - the category routes including get all categories, get single category by id, post (add a new category), put (update a category by id), delete a category by id.
 
