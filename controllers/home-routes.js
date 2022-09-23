@@ -1,5 +1,4 @@
 const router = require("express").Router();
-// const { nextTick } = require('process');
 const { Post, Comment, User } = require("../models");
 const middleware = require("../utils/auth");
 
@@ -9,7 +8,6 @@ router.get("/login", (req, res) => {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
 
@@ -25,7 +23,6 @@ router.get("/signup", (req, res) => {
 
 // router.get("/", middleware, async (req, res) => {
 router.get("/", async (req, res) => {
-  
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }]
@@ -44,7 +41,7 @@ router.get("/", async (req, res) => {
 });
 
 // RENDER POSTS WITH COMMENTS & COMMENT TEXT AREA
-router.get("/post/:id", middleware, async (req, res) => {
+router.get("/post/:id", middleware, async (req, res) => {g
   // try {
   //   const dbPostData = await Post.findByPk(req.params.id, {
   //     include: [{ model: User }]
