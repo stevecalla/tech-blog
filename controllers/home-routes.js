@@ -24,8 +24,8 @@ router.get("/signup", (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
-      include: [{ model: User }]
-  });
+      include: [{ model: User }],
+    });
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
@@ -41,28 +41,8 @@ router.get("/", async (req, res) => {
 
 // RENDER POSTS WITH COMMENTS & COMMENT TEXT AREA
 router.get("/post/:id", isAuthorized, async (req, res) => {
-  // try {
-  //   const dbPostData = await Post.findByPk(req.params.id, {
-  //     include: [{ model: User }]
-  // });
-
-  //   const posts = dbPostData.get({ plain: true });
-
-  //   res.render("comment", {
-  //     posts,
-  //     loggedIn: req.session.loggedIn 
-  //   });
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(500).json(err);
-  // }
-
   //SECTION
   try {
-    // const dbPostData = await Post.findByPk(req.params.id, {
-    //   include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }, { model: User }],
-    // });
-
     const dbPostData = await Post.findByPk(req.params.id, {
       include: [{ model: Comment, include: { model: User } }, { model: User }],
     });
@@ -79,14 +59,14 @@ router.get("/post/:id", isAuthorized, async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
-  }  
+  }
 });
 
 router.get("/posts", isAuthorized, async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
-      include: [{ model: User }]
-  });
+      include: [{ model: User }],
+    });
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
@@ -110,33 +90,10 @@ router.post("/comment", isAuthorized, async (req, res) => {
       post_id: req.body.postId,
     });
     res.status(200).json(dbCommentData);
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
-});
-
-// RENDER SAVED COMMENTS //todo remove
-router.get("/comment/:id", isAuthorized, async (req, res) => {
-//   try {
-//     const dbPostData = await Post.findByPk(req.params.id, {
-//       include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }, { model: User }],
-//     });
-
-//     const posts = dbPostData.get({ plain: true });
-//     const comments = posts.comments;
-
-//     res.render("commentSaved", {
-//       posts,
-//       comments,
-//       loggedIn: req.session.loggedIn,
-//       userId: req.session.userId,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
 });
 
 // FETCH ALL POSTS FOR CURRENT SESSION USER
@@ -144,7 +101,7 @@ router.get("/user-posts/", isAuthorized, async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }],
-      where: { user_id: req.session.userId }
+      where: { user_id: req.session.userId },
     });
 
     req.session.save(() => {
@@ -153,12 +110,11 @@ router.get("/user-posts/", isAuthorized, async (req, res) => {
 
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-    res.render("userPosts", { 
-      posts, 
+    res.render("userPosts", {
+      posts,
       loggedIn: req.session.loggedIn,
-      dashboard: req.session.dashboard = true,
+      dashboard: (req.session.dashboard = true),
     });
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -168,36 +124,35 @@ router.get("/user-posts/", isAuthorized, async (req, res) => {
 // RENDER POST AFTER IT IS CREATED
 router.get("/create-posts/", isAuthorized, async (req, res) => {
   res.render("createPost", {
-    loggedIn: req.session.loggedIn ,
-    dashboard: req.session.dashboard = true,
+    loggedIn: req.session.loggedIn,
+    dashboard: (req.session.dashboard = true),
   });
 });
 
 // RENDER POST TO BE EDITED OR DELETED
 router.get("/edit-posts/:id", isAuthorized, async (req, res) => {
-  try{ 
+  try {
     const postData = await Post.findByPk(req.params.id);
-    
-    if(!postData) {
-        res.status(404).json({message: 'No post with this id!'});
-        return;
-    };
+
+    if (!postData) {
+      res.status(404).json({ message: "No post with this id!" });
+      return;
+    }
 
     const post = postData.get({ plain: true });
 
-    res.render('editPost', {
+    res.render("editPost", {
       post,
       loggedIn: req.session.loggedIn,
-      dashboard: req.session.dashboard = true,
+      dashboard: (req.session.dashboard = true),
     });
-
   } catch (err) {
-      res.status(500).json(err);
-  }; 
+    res.status(500).json(err);
+  }
 });
 
 // ADD POST TO THE POST TABLE IN THE BLOG DATABASE
-router.post('/create-post', async (req, res) => {
+router.post("/create-post", async (req, res) => {
   try {
     const dbPostData = await Post.create({
       title: req.body.title,
@@ -215,14 +170,19 @@ router.post('/create-post', async (req, res) => {
 // UPDATE POST BASED ON EDITS PROVIDED BY USER
 router.put("/update/:id", isAuthorized, async (req, res) => {
   try {
-    const updatedPost = await Post.update({ title: req.body.title, content: req.body.content }, {
-      where: {
-        id: req.params.id
+    const updatedPost = await Post.update(
+      { title: req.body.title, content: req.body.content },
+      {
+        where: {
+          id: req.params.id,
+        },
       }
-    });
+    );
 
     if (!updatedPost || updatedPost[0] === 0) {
-      res.status(404).json({ message: 'Can\'t update. No product found with that id!' });
+      res
+        .status(404)
+        .json({ message: "Can't update. No product found with that id!" });
       return;
     }
 
@@ -237,12 +197,14 @@ router.delete("/delete/:id", isAuthorized, async (req, res) => {
   try {
     const deletedPost = await Post.destroy({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     });
 
     if (!deletedPost || deletedPost[0] === 0) {
-      res.status(404).json({ message: 'Can\'t delete. No product found with that id!' });
+      res
+        .status(404)
+        .json({ message: "Can't delete. No product found with that id!" });
       return;
     }
 

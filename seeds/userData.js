@@ -1,30 +1,12 @@
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
 
-//get password hash b/c bulk create is not hashing the password
+// USE TO GET A HASHED PASSWORD FOR THE USERDATA OBJECT BELOW
 // let passwordCrypt = async (pass) => {
 //   let b = await bcrypt.hash(pass, 10);
 //   return b;
 // }
 // passwordCrypt('password1234');
-
-// const userdata = [
-//   {
-//     username: "x",
-//     email: "x@email.com",
-//     password: "$2b$10$i04d5fOSq2PgJe5o1MFn8elmHAXyzJHIn5h7KxCMMlq/dqQ.XepOy",
-//   },
-//   {
-//     username: "y",
-//     email: "y@email.com",
-//     password: "$2b$10$i04d5fOSq2PgJe5o1MFn8elmHAXyzJHIn5h7KxCMMlq/dqQ.XepOy",
-//   },
-//   {
-//     username: "z",
-//     email: "z@email.com",
-//     password: "$2b$10$i04d5fOSq2PgJe5o1MFn8elmHAXyzJHIn5h7KxCMMlq/dqQ.XepOy",
-//   },
-// ];
 
 const userdata = [
   {
@@ -37,9 +19,9 @@ const userdata = [
     email: "sshwenn1@comsenz.com",
     password: "$2b$10$i04d5fOSq2PgJe5o1MFn8elmHAXyzJHIn5h7KxCMMlq/dqQ.XepOy",
   },
-  { 
-    username: "Cuban Hemp", 
-    email: "amaypes2@php.net", 
+  {
+    username: "Cuban Hemp",
+    email: "amaypes2@php.net",
     password: "$2b$10$i04d5fOSq2PgJe5o1MFn8elmHAXyzJHIn5h7KxCMMlq/dqQ.XepOy",
   },
   {
