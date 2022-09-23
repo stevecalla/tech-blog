@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Post, Comment, User } = require("../models");
-const middleware = require("../utils/auth");
+const isAuthorized = require("../utils/auth");
 
 // REDIRECT TO HOME PAGE AFTER LOGIN
 router.get("/login", (req, res) => {
@@ -21,7 +21,6 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// router.get("/", middleware, async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
@@ -41,7 +40,7 @@ router.get("/", async (req, res) => {
 });
 
 // RENDER POSTS WITH COMMENTS & COMMENT TEXT AREA
-router.get("/post/:id", middleware, async (req, res) => {g
+router.get("/post/:id", isAuthorized, async (req, res) => {
   // try {
   //   const dbPostData = await Post.findByPk(req.params.id, {
   //     include: [{ model: User }]
@@ -83,7 +82,7 @@ router.get("/post/:id", middleware, async (req, res) => {g
   }  
 });
 
-router.get("/posts", middleware, async (req, res) => {
+router.get("/posts", isAuthorized, async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }]
@@ -103,7 +102,7 @@ router.get("/posts", middleware, async (req, res) => {
 });
 
 // CREATE AND SAVE COMMENT
-router.post("/comment", middleware, async (req, res) => {
+router.post("/comment", isAuthorized, async (req, res) => {
   try {
     const dbCommentData = await Comment.create({
       content: req.body.comment,
@@ -119,7 +118,7 @@ router.post("/comment", middleware, async (req, res) => {
 });
 
 // RENDER SAVED COMMENTS //todo remove
-router.get("/comment/:id", middleware, async (req, res) => {
+router.get("/comment/:id", isAuthorized, async (req, res) => {
 //   try {
 //     const dbPostData = await Post.findByPk(req.params.id, {
 //       include: [{ model: Comment, where: { user_id: req.session.userId }, include: { model: User } }, { model: User }],
@@ -141,7 +140,7 @@ router.get("/comment/:id", middleware, async (req, res) => {
 });
 
 // FETCH ALL POSTS FOR CURRENT SESSION USER
-router.get("/user-posts/", middleware, async (req, res) => {
+router.get("/user-posts/", isAuthorized, async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
       include: [{ model: User }],
@@ -167,7 +166,7 @@ router.get("/user-posts/", middleware, async (req, res) => {
 });
 
 // RENDER POST AFTER IT IS CREATED
-router.get("/create-posts/", middleware, async (req, res) => {
+router.get("/create-posts/", isAuthorized, async (req, res) => {
   res.render("createPost", {
     loggedIn: req.session.loggedIn ,
     dashboard: req.session.dashboard = true,
@@ -175,7 +174,7 @@ router.get("/create-posts/", middleware, async (req, res) => {
 });
 
 // RENDER POST TO BE EDITED OR DELETED
-router.get("/edit-posts/:id", middleware, async (req, res) => {
+router.get("/edit-posts/:id", isAuthorized, async (req, res) => {
   try{ 
     const postData = await Post.findByPk(req.params.id);
     
@@ -214,7 +213,7 @@ router.post('/create-post', async (req, res) => {
 });
 
 // UPDATE POST BASED ON EDITS PROVIDED BY USER
-router.put("/update/:id", middleware, async (req, res) => {
+router.put("/update/:id", isAuthorized, async (req, res) => {
   try {
     const updatedPost = await Post.update({ title: req.body.title, content: req.body.content }, {
       where: {
@@ -234,7 +233,7 @@ router.put("/update/:id", middleware, async (req, res) => {
 });
 
 // DELETE POST BASED ON REQUEST BY USER
-router.delete("/delete/:id", middleware, async (req, res) => {
+router.delete("/delete/:id", isAuthorized, async (req, res) => {
   try {
     const deletedPost = await Post.destroy({
       where: {
