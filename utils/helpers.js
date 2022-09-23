@@ -9,6 +9,7 @@ module.exports = {
       date.getMonth(),
       date.getDate()
     );
+    
     return dateFormatted.toLocaleDateString();
   },
 
