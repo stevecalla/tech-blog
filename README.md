@@ -98,7 +98,7 @@ Contributor Covenant Code of Conduct
 ## Resources
 
 1. Project Manager: [Steve Calla - GitHub Profile](https://github.com/stevecalla)
-2. Deployed Site URL - Heroku: 
+2. Deployed Site URL - Heroku: <https://techie-blog-301.herokuapp.com/>
 3. GitHub Repo: <https://github.com/stevecalla/tech-blog>
 4. GitHub Projects: https://github.com/users/stevecalla/projects/20
 4. Contact: [Email Steve](mailto:callasteven@gmail.com)
