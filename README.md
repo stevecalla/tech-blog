@@ -1,4 +1,4 @@
-# ECOMMERCE BACKEND
+# TECH BLOG
 [![License:  MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Index
